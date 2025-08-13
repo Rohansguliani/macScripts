@@ -1,0 +1,2 @@
+# macScripts
+scripts for mac
