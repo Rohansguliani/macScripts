@@ -79,8 +79,26 @@ for i in {1..5}; do if defaults read com.shottr.shottr &>/dev/null; then default
 # --- 5. Apply Global Key Swaps & Bindings ---
 print_header "⌨️ Applying Global Key Swaps and Text Bindings..."
 # Text Editing Keybindings
-KEYBINDINGS_DIR="$HOME/Library/KeyBindings"; mkdir -p "$KEYBINDINGS_DIR"; cat > "$KEYBINDINGS_DIR/DefaultKeyBinding.dict" << 'EOF'
-{"@$"="moveToBeginningOfParagraphAndModifySelection:","@$"="moveToEndOfParagraphAndModifySelection:","@\UF702"="moveWordLeft:","@\UF703"="moveWordRight:","$@\UF702"="moveWordLeftAndModifySelection:","$@\UF703"="moveWordRightAndModifySelection:","~\UF702"="moveToBeginningOfLine:","~\UF703"="moveToEndOfLine:","$~\UF702"="moveToBeginningOfLineAndModifySelection:","$~\UF703"="moveToEndOfLineAndModifySelection:"}
+KEYBINDINGS_DIR="$HOME/Library/KeyBindings"
+mkdir -p "$KEYBINDINGS_DIR"
+cat > "$KEYBINDINGS_DIR/DefaultKeyBinding.dict" << 'EOF'
+{
+    /* Remap Command + Arrow Keys for Word Navigation */
+    "@\UF702" = "moveWordLeft:";                           /* Cmd + Left    */
+    "@\UF703" = "moveWordRight:";                          /* Cmd + Right   */
+    "@$\UF702" = "moveWordLeftAndModifySelection:";        /* Cmd + Shift + Left */
+    "@$\UF703" = "moveWordRightAndModifySelection:";       /* Cmd + Shift + Right*/
+
+    /* Remap Option + Arrow Keys for Line Navigation */
+    "~\UF702" = "moveToBeginningOfLine:";                  /* Opt + Left    */
+    "~\UF703" = "moveToEndOfLine:";                        /* Opt + Right   */
+    "~$\UF702" = "moveToBeginningOfLineAndModifySelection:";/* Opt + Shift + Left */
+    "~$\UF703" = "moveToEndOfLineAndModifySelection:";      /* Opt + Shift + Right*/
+    
+    /* Remap Command + Shift + Up/Down for Paragraph Navigation */
+    "@$\UF700" = "moveToBeginningOfParagraphAndModifySelection:"; /* Cmd + Shift + Up */
+    "@$\UF701" = "moveToEndOfParagraphAndModifySelection:";     /* Cmd + Shift + Down */
+}
 EOF
 echo "✓ Text keybindings created."
 # Swap Left Command and Control Keys
