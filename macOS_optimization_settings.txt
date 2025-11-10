@@ -1,0 +1,586 @@
+MacOS Optimization & Customization Settings
+============================================
+Generated for: MacBook Pro M4 Pro
+Date: $(date)
+
+============================================
+1. BETTERTOUCHTOOL - THREE FINGER DRAG FIX
+============================================
+
+Problem: Three-finger drag had a release delay when letting go.
+
+Solution: BetterTouchTool automatically clicks after releasing three-finger drag.
+
+Setup Steps:
+1. Install BetterTouchTool from https://folivora.ai/
+2. Go to Trackpad section in BTT
+3. Add new trigger: "Release Last Finger After Previous Touch With 3 Fingers"
+4. Assign action: "Left Click (At Current Mouse Position)"
+5. Enable the trigger
+6. (Optional) Disable macOS built-in three-finger drag in System Settings
+
+This eliminates the delay by auto-clicking immediately after release.
+
+============================================
+2. TRACKPAD SETTINGS (CURRENT CONFIGURATION)
+============================================
+
+CORE TRACKPAD SETTINGS:
+- Trackpad tracking speed: 3 (MAX)
+  Command: defaults write com.apple.AppleMultitouchTrackpad TrackpadTrackingSpeed -int 3
+  Command: defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTrackingSpeed -int 3
+
+- Trackpad scaling: 5.539802 (custom setting)
+  Command: defaults write NSGlobalDomain com.apple.trackpad.scaling -float 5.539802
+
+- Drag delay: 0 (minimum)
+  Command: defaults write NSGlobalDomain com.apple.trackpad.dragDelay -float 0
+
+- Trackpad scrolling: 0.5882 (custom setting)
+  Command: defaults write NSGlobalDomain com.apple.trackpad.scrolling -float 0.5882
+
+GESTURE SETTINGS:
+- Three-finger drag: ENABLED (1)
+  Command: defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+
+- Tap to click: ENABLED (1)
+  Status: Clicking = 1
+
+- Force Click: DISABLED/SUPPRESSED (reduces gesture processing delay)
+  Command: defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool false
+  Command: defaults write com.apple.AppleMultitouchTrackpad ForceSuppressed -bool true
+
+- Two-finger scroll: ENABLED (1)
+  Status: TrackpadScroll = 1
+
+- Horizontal scroll: ENABLED (1)
+  Status: TrackpadHorizScroll = 1
+
+- Momentum scrolling: ENABLED (1)
+  Status: TrackpadMomentumScroll = 1
+
+- Pinch to zoom: ENABLED (1)
+  Status: TrackpadPinch = 1
+
+- Right click (two fingers): ENABLED (1)
+  Status: TrackpadRightClick = 1
+
+- Rotate: DISABLED (0)
+  Status: TrackpadRotate = 0
+
+- Drag Lock: DISABLED (0)
+  Status: DragLock = 0
+
+GESTURE MAPPINGS:
+- Three-finger tap: Look up (2)
+  Status: TrackpadThreeFingerTapGesture = 2
+
+- Four-finger horizontal swipe: Switch spaces (2)
+  Status: TrackpadFourFingerHorizSwipeGesture = 2
+
+- Four-finger vertical swipe: Mission Control/App Exposé (2)
+  Status: TrackpadFourFingerVertSwipeGesture = 2
+
+- Three-finger horizontal swipe: DISABLED (0)
+  Status: TrackpadThreeFingerHorizSwipeGesture = 0
+
+- Three-finger vertical swipe: DISABLED (0)
+  Status: TrackpadThreeFingerVertSwipeGesture = 0
+
+- Two-finger from right edge: Notification Center (3)
+  Status: TrackpadTwoFingerFromRightEdgeSwipeGesture = 3
+
+- Hand resting: ENABLED (1)
+  Status: TrackpadHandResting = 1
+
+============================================
+3. DOCK SETTINGS (CURRENT CONFIGURATION)
+============================================
+
+VISIBILITY & BEHAVIOR:
+- Autohide: ENABLED (1)
+  Command: defaults write com.apple.dock autohide -bool true
+
+- Autohide delay: 0 seconds (instant)
+  Command: defaults write com.apple.dock autohide-delay -float 0
+
+- Autohide time modifier: 0 (instant animation)
+  Command: defaults write com.apple.dock autohide-time-modifier -float 0
+
+MAGNIFICATION:
+- Magnification: ENABLED (1) ⭐
+  Command: defaults write com.apple.dock magnification -bool true
+
+- Icon size: 23 pixels
+  Command: defaults write com.apple.dock tilesize -int 23
+
+- Magnified size: 26 pixels
+  Command: defaults write com.apple.dock largesize -int 26
+
+- Magnification effect: Scale
+  Command: defaults write com.apple.dock mineffect -string scale
+  (Options: genie, scale, suck)
+
+ANIMATION SETTINGS:
+- Exposé animation duration: 0.1 seconds (fast)
+  Command: defaults write com.apple.dock expose-animation-duration -float 0.1
+
+- Launch animation: DISABLED (0)
+  Status: launchanim = 0
+
+OTHER SETTINGS:
+- Show recent apps: DISABLED (0)
+  Status: show-recents = 0
+
+- Show App Exposé gesture: DISABLED (0)
+  Status: showAppExposeGestureEnabled = 0
+
+- Show Desktop gesture: DISABLED (0)
+  Status: showDesktopGestureEnabled = 0
+
+- Show Launchpad gesture: DISABLED (0)
+  Status: showLaunchpadGestureEnabled = 0
+
+- Hot corner (bottom right): Desktop (14)
+  Status: wvous-br-corner = 14
+
+To apply dock changes:
+  killall Dock
+
+============================================
+4. PERFORMANCE & POWER SETTINGS
+============================================
+
+POWER MODE:
+- Power mode: 0 (High Performance)
+  Command: sudo pmset -a powermode 0
+  (Changed from 2/Balanced to 0/High Performance)
+
+SLEEP SETTINGS:
+- Standby: DISABLED (0)
+  Command: sudo pmset -a standby 0
+
+- Sleep: ENABLED but prevented by powerd
+  Status: sleep = 1 (sleep prevented by powerd)
+
+- Hibernate mode: 3
+  Status: hibernatemode = 3
+
+- Power Nap: DISABLED (0)
+  Command: sudo pmset -a powernap 0
+
+- Display Sleep: DISABLED on AC (0)
+  Command: sudo pmset -c displaysleep 0
+
+- Disk Sleep: DISABLED (0)
+  Command: sudo pmset -a disksleep 0
+
+- Sleep Services: DISABLED (0)
+  Status: SleepServices = 0
+
+OTHER:
+- Wake on network: ENABLED (1)
+  Status: womp = 1
+
+- Network over sleep: DISABLED (0)
+  Status: networkoversleep = 0
+
+============================================
+5. SPOTLIGHT INDEXING
+============================================
+
+- Status: DISABLED (for performance)
+  Command: sudo mdutil -a -i off
+  Command: sudo killall mds mds_stores mdworker
+
+To re-enable later:
+  Command: sudo mdutil -a -i on
+
+Current status: Indexing disabled on all volumes
+
+============================================
+6. WINDOW & ANIMATION SETTINGS
+============================================
+
+- Window resize animation: Minimum (0.001s)
+  Command: defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+- Reduce Motion: DISABLED (0)
+  Status: reduceMotion = 0
+
+- Reduce Transparency: DISABLED (0)
+  Status: reduceTransparency = 0
+
+============================================
+7. SYSTEM INFO
+============================================
+
+- macOS Version: 15.7.2 (Sequoia)
+- Model: MacBook Pro M4 Pro
+- CPU: Apple M4 Pro (14 cores: 10 performance + 4 efficiency)
+- Memory: 24 GB
+- Trackpad: Built-in trackpad
+- Location: en_US:US
+
+============================================
+8. INSTALLED APPLICATIONS (Downloaded Files)
+============================================
+
+The following applications were downloaded and installed during setup:
+
+1. BetterTouchTool.zip (56MB)
+   - Purpose: Advanced trackpad/mouse gesture customization
+   - Used for: Eliminating three-finger drag release delay
+   - Location: ~/Downloads/BetterTouchTool.zip
+   - Website: https://folivora.ai/
+
+2. Cursor-darwin-arm64.dmg (189MB)
+   - Purpose: AI-powered code editor/IDE
+   - Location: ~/Downloads/Cursor-darwin-arm64.dmg
+   - Website: https://cursor.sh/
+
+3. Docker.dmg (543MB)
+   - Purpose: Containerization platform
+   - Location: ~/Downloads/Docker.dmg
+   - Website: https://www.docker.com/
+
+4. Helium Browser (helium_0.6.3.1_arm64-macos.dmg) (106MB)
+   - Purpose: Privacy-focused web browser
+   - Location: ~/Downloads/helium_0.6.3.1_arm64-macos.dmg
+   - Website: https://helium.computer/
+   - Note: Configured to enable extension downloads (Helium services enabled)
+
+5. Raycast.dmg (99MB)
+   - Purpose: Productivity launcher and automation tool
+   - Location: ~/Downloads/Raycast.dmg
+   - Website: https://raycast.com/
+
+6. Rectangle (Rectangle0.92.dmg) (2.5MB)
+   - Purpose: Window management tool (snap windows)
+   - Location: ~/Downloads/Rectangle0.92.dmg
+   - Website: https://rectangleapp.com/
+
+7. Shottr (Shottr-1.8.1.dmg) (2.0MB)
+   - Purpose: Screenshot and annotation tool
+   - Location: ~/Downloads/Shottr-1.8.1.dmg
+   - Website: https://shottr.cc/
+
+8. Stats.dmg (6.7MB)
+   - Purpose: System monitoring (CPU, memory, disk, network stats)
+   - Location: ~/Downloads/Stats.dmg
+   - Website: https://github.com/exelban/stats
+
+9. BetterDisplay (BetterDisplay-v4.0.4.dmg) (17MB)
+   - Purpose: Advanced display management and scaling
+   - Location: ~/Downloads/BetterDisplay-v4.0.4.dmg
+   - Website: https://github.com/waydabber/BetterDisplay
+
+10. AltTab.app (Direct app folder)
+    - Purpose: Windows-style alt-tab window switcher
+    - Location: ~/Downloads/AltTab.app
+    - Website: https://alt-tab-macos.netlify.app/
+
+DOWNLOAD TIMELINE:
+- Helium Browser: Nov 6, 2024 (23:12)
+- Cursor: Nov 7, 2024 (00:31)
+- BetterDisplay: Nov 7, 2024 (00:55)
+- Docker: Nov 7, 2024 (01:01)
+- Raycast: Nov 7, 2024 (01:03)
+- Rectangle: Nov 7, 2024 (01:04)
+- Stats: Nov 7, 2024 (01:11)
+- Shottr: Nov 7, 2024 (01:32)
+- BetterTouchTool: Nov 7, 2024 (11:09)
+
+TOTAL DOWNLOAD SIZE: ~1.0 GB
+
+APPLICATION CATEGORIES:
+- Productivity: Raycast, Rectangle, AltTab
+- Development: Cursor, Docker
+- System Tools: Stats, BetterDisplay, BetterTouchTool
+- Media: Shottr
+- Browsers: Helium
+
+============================================
+9. FINDER SETTINGS
+============================================
+
+DESKTOP DISPLAY:
+- Show External Hard Drives on Desktop: ENABLED (1)
+  Command: defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+
+- Show Hard Drives on Desktop: DISABLED (0)
+  Command: defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
+
+- Show Removable Media on Desktop: ENABLED (1)
+  Command: defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+FINDER WINDOW:
+- Show Sidebar: ENABLED (1)
+  Status: ShowSidebar = 1
+
+- Show Toolbar: ENABLED (1)
+  Status: ShowToolbar = 1
+
+- Show Status Bar: DISABLED (0)
+  Status: ShowStatusBar = 0
+
+- Show Tab View: DISABLED (0)
+  Status: ShowTabView = 0
+
+PATH DISPLAY:
+- Show Full Path in Title Bar: ENABLED (1) ⭐
+  Command: defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+  Status: _FXShowPosixPathInTitle = 1
+
+- Show Path Bar at Bottom: ENABLED (1) ⭐
+  Command: defaults write com.apple.finder ShowPathbar -bool true
+  Status: ShowPathbar = 1
+  (Shows breadcrumb path at bottom of Finder windows)
+
+ANIMATIONS:
+- Disable All Animations: ENABLED (1)
+  Status: DisableAllAnimations = 1
+
+VIEW SETTINGS:
+- Desktop Icon Size: 56 pixels
+- Desktop Grid Spacing: 54
+- Desktop Label Position: Bottom
+- Standard Icon Size: 64 pixels (in folders)
+- List View: Sort by Name (ascending)
+- List View Columns: Name, Date Modified, Size, Kind (visible)
+
+ICLOUD:
+- iCloud Drive Enabled: ENABLED (1)
+  Status: FXICloudDriveEnabled = 1
+
+- Show iCloud Desktop: DISABLED (0)
+  Status: SidebarShowingiCloudDesktop = 0
+
+- Show iCloud Documents: DISABLED (0)
+  Status: FXICloudDriveDocuments = 0
+
+To apply Finder changes:
+  killall Finder
+
+============================================
+10. APPEARANCE & THEME SETTINGS
+============================================
+
+INTERFACE STYLE:
+- Appearance: Dark Mode
+  Command: defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
+  Status: AppleInterfaceStyle = Dark
+
+FONT SETTINGS:
+- Font Smoothing: Enabled
+  Status: AppleAntiAliasingThreshold = 4
+
+- Global Font Size: XS (Extra Small)
+  Status: FontSizeCategory global = XS
+
+ACCESSIBILITY APPEARANCE:
+- Reduce Motion: DISABLED (0)
+  Status: reduceMotion = 0
+
+- Reduce Transparency: DISABLED (0)
+  Status: reduceTransparency = 0
+
+- Zoom Hotkeys: DISABLED (0)
+  Status: closeViewHotkeysEnabled = 0
+
+============================================
+11. MENU BAR SETTINGS
+============================================
+
+CLOCK SETTINGS:
+- Clock Style: Digital (not analog)
+  Status: IsAnalog = 0
+
+- Show AM/PM: ENABLED (1)
+  Command: defaults write com.apple.menuextra.clock ShowAMPM -bool true
+
+- Show Date: DISABLED (0)
+  Command: defaults write com.apple.menuextra.clock ShowDate -bool false
+
+- Show Day of Week: ENABLED (1)
+  Command: defaults write com.apple.menuextra.clock ShowDayOfWeek -bool true
+
+VISIBLE MENU BAR ITEMS:
+- Battery: VISIBLE (1)
+- Bluetooth: VISIBLE (1)
+- Sound: VISIBLE (1)
+- WiFi: VISIBLE (1)
+- Clock: VISIBLE (1)
+
+HIDDEN MENU BAR ITEMS:
+- AirDrop: HIDDEN (0)
+- Display: HIDDEN (0)
+- Focus Modes: HIDDEN (0)
+- Now Playing: HIDDEN (0)
+
+MENU BAR POSITIONING:
+- Battery: Position 180
+- WiFi: Position 222
+- Sound: Position 260
+- Bluetooth: Position 298
+- Display: Position 326
+- Focus Modes: Position 430
+- AirDrop: Position 470
+
+- Menu Bar Hidden in Fullscreen: DISABLED (0)
+  Status: _HIHideMenuBar = 0
+
+============================================
+12. DESKTOP & WINDOW MANAGEMENT
+============================================
+
+DESKTOP:
+- Hide Desktop: ENABLED (1)
+  Status: HideDesktop = 1
+  (Desktop icons hidden when windows are present)
+
+HOT CORNERS:
+- Bottom Right Corner: Show Desktop (14)
+  Command: defaults write com.apple.dock wvous-br-corner -int 14
+  Status: wvous-br-corner = 14
+  (Hot corner values: 0=None, 2=Mission Control, 3=Application Windows, 4=Desktop, 5=Start Screen Saver, 6=Disable Screen Saver, 7=Put Display to Sleep, 10=Lock Screen, 11=Launchpad, 12=Notification Center, 13=Lock Screen, 14=Quick Note)
+
+WINDOW MANAGER:
+- Auto Hide: ENABLED (1)
+  Status: AutoHide = 1
+
+- App Window Grouping: ENABLED (1)
+  Status: AppWindowGroupingBehavior = 1
+
+- Stage Manager Hide Widgets: DISABLED (0)
+  Status: StageManagerHideWidgets = 0
+
+- Enable Tiling by Edge Drag: DISABLED (0)
+  Status: EnableTilingByEdgeDrag = 0
+
+SPACES (Mission Control):
+- Spans Displays: ENABLED (1)
+  Status: spans-displays = 1
+  (Spaces span all displays)
+
+- Current Spaces: 3 spaces configured
+  - Space 1: Default (no name)
+  - Space 2: Named space (F5C45226-F60A-414F-84E7-5BB688ED98E8)
+  - Space 3: Named space (879DB8B7-1B77-4FF6-8E78-C6F4367DBA3D)
+
+============================================
+13. TERMINAL SETTINGS
+============================================
+
+PATH DISPLAY:
+- Show Full Path in Prompt: ENABLED ⭐
+  Configuration: Added to ~/.zshrc
+  - Prompt shows: username@hostname /full/path/to/directory $
+  - Window title updates automatically with current directory
+
+- Show Full Path in Window Title: ENABLED ⭐
+  Configuration: Added to ~/.zshrc
+  - Terminal window title bar shows current working directory
+  - Updates automatically when changing directories
+
+CONFIGURATION FILES:
+- Zsh Configuration: ~/.zshrc
+  Contains:
+    - Custom PS1 prompt with full path (%~)
+    - precmd() function to update window title on prompt
+    - chpwd() function to update window title on directory change
+
+TERMINAL PREFERENCES:
+- Default Window Settings: Basic
+  Status: Default Window Settings = Basic
+
+- Startup Window Settings: Basic
+  Status: Startup Window Settings = Basic
+
+- Show Line Marks: DISABLED (0)
+  Status: ShowLineMarks = 0
+
+To apply Terminal changes:
+  - Open a new Terminal window (changes take effect immediately)
+  - Or run: source ~/.zshrc
+
+============================================
+14. DISPLAY SETTINGS
+============================================
+
+DISPLAY INFO:
+- Display Type: Built-in Liquid Retina XDR Display
+- Resolution: 3456 x 2234 Retina
+- Main Display: Yes
+- Pixel Depth: Retina (high DPI)
+
+DISPLAY MANAGEMENT:
+- BetterDisplay installed and configured
+  (Advanced display management tool - see Applications section)
+
+============================================
+QUICK REFERENCE - VERIFY SETTINGS
+============================================
+
+Check power mode:
+  pmset -g | grep powermode
+
+Check trackpad scaling:
+  defaults read NSGlobalDomain com.apple.trackpad.scaling
+
+Check trackpad tracking speed:
+  defaults read com.apple.AppleMultitouchTrackpad TrackpadTrackingSpeed
+
+Check dock magnification:
+  defaults read com.apple.dock magnification
+
+Check dock autohide:
+  defaults read com.apple.dock autohide
+
+Check Spotlight status:
+  mdutil -s /
+
+Check all dock settings:
+  defaults read com.apple.dock
+
+Check all trackpad settings:
+  defaults read com.apple.AppleMultitouchTrackpad
+
+============================================
+NOTES
+============================================
+
+- Some changes require sudo/admin access
+- Dock needs to be restarted after dock changes (killall Dock)
+- System Settings may need to be restarted for some changes
+- Spotlight indexing can be re-enabled if search functionality is needed
+- Power mode settings affect battery life when not plugged in
+- Dock magnification creates a nice hover effect on icons
+- Trackpad scaling of 5.54 is quite high - provides very fast cursor movement
+- Three-finger drag works instantly with BetterTouchTool workaround
+
+============================================
+RESTORING DEFAULT SETTINGS (IF NEEDED)
+============================================
+
+Reset trackpad to defaults:
+  defaults delete com.apple.AppleMultitouchTrackpad
+  defaults delete NSGlobalDomain com.apple.trackpad.scaling
+  defaults delete NSGlobalDomain com.apple.trackpad.dragDelay
+  killall System\ Settings
+
+Reset dock to defaults:
+  defaults delete com.apple.dock
+  killall Dock
+
+Reset power settings:
+  sudo pmset -a powermode 2
+  sudo pmset -a standby 1
+  sudo pmset -a powernap 1
+  sudo pmset -c displaysleep 10
+
+Re-enable Spotlight:
+  sudo mdutil -a -i on
+
+============================================
+
